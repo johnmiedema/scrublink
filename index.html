@@ -1,0 +1,74 @@
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrub your Link of Tracking Data before Sharing</title>
+
+<script type="text/javascript">
+function createurl(){
+	
+	var url = document.getElementById("url");
+	var urlvalue = url.value;
+
+	var urlleft = urlvalue.substring(0,4);
+	if (urlleft == "http") {
+
+		var url2 = urlvalue; 
+
+		var numIndex = urlvalue.indexOf("?");
+		//http://a.ca? //shortest version is 13-1=13
+		if (numIndex > 10) {
+			url2 = urlvalue.substring(0,numIndex);
+		}
+
+		var urlshare = document.getElementById("urlshare");
+		urlshare.value = url2;
+		copyurlshare();
+	}
+	else {
+		alert("Please enter a link starting with http or https");
+		url.focus();
+	}
+};
+
+function viewurlshare(){
+	var urlshare = document.getElementById("urlshare");
+	var urlsharevalue = urlshare.value;
+	var urlshareleft = urlsharevalue.substring(0,4);
+	if (urlshareleft == "http") {	
+		window.location.href = urlsharevalue;
+	}
+}
+
+function copyurlshare(){
+	var urlshare = document.getElementById("urlshare");
+	var urlsharevalue = urlshare.value;
+	urlshare.select();
+	navigator.clipboard.writeText(urlsharevalue);
+}
+
+</script>
+</head>
+
+<body style="font-family: sans-serif;max-width:1000px">
+<h1>Scrub your Link of Tracking Data before Sharing</h1>
+<p>Many links include tracking data for advertising. This tool will scrub 🧼 the tracking data for your privacy.</p> 
+<p><img src="scrubexample.png" /></p>
+<h2>Steps</h2>
+<ol>
+<li>Insert a link you want to scrub of tracking data.</li>
+<li>Click the Scrub Link button.</li>
+<li>Copy and share the scrubbed link.</li>
+</ol>
+<p><input type="url" name="url" id="url" placeholder="https://trackinglink.com" pattern="https://.*"  size="50" required />
+<p><input id="butScrub" type="button" value="Scrub Link" onclick="createurl();" />
+<p><input type="text" name="urlshare" id="urlshare" size="50" />
+<p><input id="butCopy" type="button" value="Copy Link" onclick="copyurlshare();" />
+<input id="butView" type="button" value="View Link" onclick="viewurlshare();" />
+
+<h2>More Information</h2>
+<p>This work is shared to the public domain <a href="https://creativecommons.org/publicdomain/zero/1.0/">(CCO 1.0)</a> at <a href="https://github.com/johnmiedema/scrublink">GitHub</a>
+<p>Contact the creator at <a href="https://johnmiedema.art/">johnmiedema.art</a>.
+</body>
+
+</html>
